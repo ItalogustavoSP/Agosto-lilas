@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://italogustavosp.github.io/Agosto-lilas/sitemap.xml
