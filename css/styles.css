@@ -1150,6 +1150,8 @@ button, a, .card, .story, .right, .helprow, .q, .place { -webkit-tap-highlight-c
     pointer-events: none;
 }
 .slide blockquote { animation: quote-enter .55s cubic-bezier(.2,.7,.2,1); }
+.slide blockquote.quote-enter-now { animation: quote-enter-now .55s cubic-bezier(.2,.7,.2,1); }
+@keyframes quote-enter-now { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 .dot { cursor: pointer; }
 .dot:focus-visible, .arrow:focus-visible { outline-color: #fff; outline-offset: 4px; }
 .arrow { transition: transform .22s ease, background .22s ease, border-color .22s ease; }
