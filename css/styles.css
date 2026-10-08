@@ -1572,3 +1572,39 @@ button, .btn, .q { position: relative; overflow: hidden; }
         will-change: auto;
     }
 }
+
+
+/* Crossfade real: o relato anterior continua presente enquanto o novo entra. */
+#carousel .slide.is-exiting {
+    position: absolute !important;
+    inset: 0;
+    z-index: 2;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: none;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1);
+}
+#carousel .slide.is-exiting.is-fading-out {
+    opacity: 0 !important;
+    filter: blur(7px);
+    transform: translate3d(0, -14px, 0) scale(1.018);
+}
+#carousel .slide.on {
+    z-index: 1;
+}
+#carousel .slide,
+#carousel .slide.on,
+#carousel .slide.is-exiting,
+#carousel .slide.is-exiting.is-fading-out {
+    transition:
+        opacity 1.25s cubic-bezier(.22,.61,.36,1),
+        transform 1.45s cubic-bezier(.22,.61,.36,1),
+        filter 1.25s cubic-bezier(.22,.61,.36,1) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+    #carousel .slide.is-exiting,
+    #carousel .slide.is-exiting.is-fading-out {
+        transition: none !important;
+    }
+}
