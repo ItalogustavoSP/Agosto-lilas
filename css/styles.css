@@ -1442,7 +1442,7 @@ button, .btn, .q { position: relative; overflow: hidden; }
     background: #e4c5ff;
 }
 #home .carousel-progress span.running {
-    animation: story-progress 5s linear forwards;
+    animation: story-progress 3s linear forwards;
 }
 #home .car-ctrl {
     z-index: 4;
@@ -1490,4 +1490,26 @@ button, .btn, .q { position: relative; overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
     #home .carousel-progress span.running { animation: none !important; transform: scaleX(1); }
+}
+
+
+/* Garantia de que somente o relato ativo fica visível no carrossel */
+#carousel .slides { position: relative; }
+#carousel .slide {
+    position: absolute !important;
+    inset: 0;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
+    transition: opacity .45s ease, transform .45s ease, visibility .45s ease;
+}
+#carousel .slide.on {
+    position: relative !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+#carousel .carousel-progress span.running {
+    animation: story-progress 3s linear forwards;
 }
