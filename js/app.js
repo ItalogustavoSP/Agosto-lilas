@@ -108,17 +108,11 @@ const names = {
                 void progress.offsetWidth;
                 progress.classList.add('running');
             }
-            timer = setInterval(() => showSlide(cur + 1), 5000);
+            timer = setInterval(() => showSlide(cur + 1), 3000);
         }
 
         const car = document.getElementById('carousel');
-        // Não pausar apenas porque o ponteiro está sobre o carrossel: isso fazia
-        // parecer que a troca automática não funcionava.
-        car?.addEventListener('focusin', () => {
-            clearInterval(timer);
-            document.getElementById('carousel-progress-bar')?.classList.remove('running');
-        });
-        car?.addEventListener('focusout', restartTimer);
+        // O carrossel continua avançando automaticamente mesmo após clicar nas setas.
 
         renderStories();
         restartTimer();
