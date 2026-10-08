@@ -22,15 +22,15 @@
                 <div class="brandmark">♀</div>
                 <div><b>Mulher Segura</b><small>Você não está sozinha</small></div>
             </div>
-            <button class="mobile-menu" onclick="menu()" aria-label="Abrir menu">☰</button>
+            <button class="mobile-menu" data-action="menu" aria-label="Abrir menu" aria-controls="nav" aria-expanded="false">☰</button>
             <nav class="nav" id="nav" aria-label="Navegação principal">
-                <button class="on" data-s="home" onclick="go('home')"><span>⌂</span><span>Início</span></button>
-                <button data-s="ajuda" onclick="go('ajuda')"><span>✦</span><span>Preciso de ajuda</span></button>
-                <button data-s="denuncia" onclick="go('denuncia')"><span>⚑</span><span>Denunciar agressão</span></button>
-                <button data-s="delegacias" onclick="go('delegacias')"><span>⌖</span><span>Delegacias próximas</span></button>
-                <button data-s="historias" onclick="go('historias')"><span>❝</span><span>Histórias</span></button>
-                <button data-s="direitos" onclick="go('direitos')"><span>♡</span><span>Meus direitos</span></button>
-                <button data-s="chat" onclick="go('chat')"><span>☏</span><span>Falar com assistente</span></button>
+                <button class="on" data-s="home" data-action="go" data-action-arg="home"><span>⌂</span><span>Início</span></button>
+                <button data-s="ajuda" data-action="go" data-action-arg="ajuda"><span>✦</span><span>Preciso de ajuda</span></button>
+                <button data-s="denuncia" data-action="go" data-action-arg="denuncia"><span>⚑</span><span>Denunciar agressão</span></button>
+                <button data-s="delegacias" data-action="go" data-action-arg="delegacias"><span>⌖</span><span>Delegacias próximas</span></button>
+                <button data-s="historias" data-action="go" data-action-arg="historias"><span>❝</span><span>Histórias</span></button>
+                <button data-s="direitos" data-action="go" data-action-arg="direitos"><span>♡</span><span>Meus direitos</span></button>
+                <button data-s="chat" data-action="go" data-action-arg="chat"><span>☏</span><span>Falar com assistente</span></button>
             </nav>
             <div class="side-alert">
                 <b>Denúncia anônima</b>
@@ -42,8 +42,8 @@
             <header class="top">
                 <b id="title">Mulher Segura · Agosto Lilás</b>
                 <div>
-                    <button onclick="exitNow()">Saída rápida</button>
-                    <button onclick="go('direitos')" aria-label="Meus direitos">♡</button>
+                    <button data-action="exitNow">Saída rápida</button>
+                    <button data-action="go" data-action-arg="direitos" aria-label="Meus direitos">♡</button>
                 </div>
             </header>
 
@@ -69,14 +69,14 @@
                         <div class="car-ctrl">
                             <div class="dots" id="dots"></div>
                             <div class="arrows">
-                                <button class="arrow" onclick="slideBy(-1)" aria-label="Relato anterior">‹</button>
-                                <button class="arrow" onclick="slideBy(1)" aria-label="Próximo relato">›</button>
+                                <button class="arrow" data-action="slideBy" data-action-arg="-1" aria-label="Relato anterior">‹</button>
+                                <button class="arrow" data-action="slideBy" data-action-arg="1" aria-label="Próximo relato">›</button>
                             </div>
                         </div>
                     </div>
                     <div class="stories-more">
                      
-                        <button class="btn outline" onclick="go('historias')">Ler mais histórias</button>
+                        <button class="btn outline" data-action="go" data-action-arg="historias">Ler mais histórias</button>
                     </div>
                 </div>
 
@@ -94,8 +94,8 @@
                         </div>
 
                         <div class="buttons">
-                            <button class="btn primary" onclick="go('ajuda')">Preciso de ajuda agora</button>
-                            <button class="btn outline" onclick="go('denuncia')">Denunciar agressão</button>
+                            <button class="btn primary" data-action="go" data-action-arg="ajuda">Preciso de ajuda agora</button>
+                            <button class="btn outline" data-action="go" data-action-arg="denuncia">Denunciar agressão</button>
                         </div>
                     </div>
                     <div class="helpimg">
@@ -114,14 +114,14 @@
                         <a class="q" href="tel:181"><i>☎</i><b>Disque 181</b></a>
                         <a class="q" href="tel:180"><i>♡</i><b>Ligue 180</b></a>
                         <a class="q" href="https://wa.me/556196100180" target="_blank" rel="noopener"><i>◉</i><b>WhatsApp 180</b></a>
-                        <a class="q" href="#" onclick="go('delegacias');return false"><i>⌖</i><b>Delegacias</b></a>
-                        <a class="q" href="#" onclick="go('direitos');return false"><i>▤</i><b>Seus direitos</b></a>
+                        <a class="q" href="#" data-action="go" data-action-arg="delegacias"><i>⌖</i><b>Delegacias</b></a>
+                        <a class="q" href="#" data-action="go" data-action-arg="direitos"><i>▤</i><b>Seus direitos</b></a>
                     </div>
                 </div>
 
-                <div class="card" style="margin-top:20px">
+                <div class="card" class="card-spaced">
                     <h3>Qual canal usar?</h3>
-                    <p><b>181:</b> denúncia anônima em São Paulo. </P>
+                    <p><b>181:</b> denúncia anônima em São Paulo. </p>
                     <p><b>180:</b> Central de Atendimento à Mulher, com orientação, acolhimento e registro/encaminhamento de denúncias em todo o Brasil.</p>
                     <p><b>190:</b> somente em emergência imediata, quando é necessário atendimento policial urgente.</p>
                 </div>
@@ -194,7 +194,7 @@
                                 <p>Encontre DDMs e serviços próximos usando sua localização.</p>
                             </div>
                         </div>
-                        <button class="btn outline" onclick="go('delegacias')">Ver locais</button>
+                        <button class="btn outline" data-action="go" data-action-arg="delegacias">Ver locais</button>
                     </div>
                 </div>
                 <div class="notice">Se estiver usando um aparelho que outras pessoas também acessam, evite salvar senhas, relatos ou documentos nele. A saída rápida fecha o site indo para uma página neutra.</div>
@@ -246,10 +246,10 @@
                     </div>
                     <div class="actions">
                         <span></span>
-                        <button class="btn primary" onclick="denStep(2)">Continuar</button>
+                        <button class="btn primary" data-action="denStep" data-action-arg="2">Continuar</button>
                     </div>
                 </div>
-                <div id="d2" style="display:none">
+                <div id="d2" hidden>
                     <div class="card">
                         <h3>Conte o que aconteceu</h3>
                         <div class="fields">
@@ -269,11 +269,11 @@
                         <div class="notice">Este formulário é apenas para organização. Ele não registra uma ocorrência por conta própria. O registro real deve ser feito nos canais oficiais.</div>
                     </div>
                     <div class="actions">
-                        <button class="btn outline" onclick="denStep(1)">Voltar</button>
-                        <button class="btn primary" onclick="denStep(3)">Ver canais oficiais</button>
+                        <button class="btn outline" data-action="denStep" data-action-arg="1">Voltar</button>
+                        <button class="btn primary" data-action="denStep" data-action-arg="3">Ver canais oficiais</button>
                     </div>
                 </div>
-                <div id="d3" style="display:none">
+                <div id="d3" hidden>
                     <div class="grid2">
                         <div class="card">
                             <h3>181 · denúncia anônima</h3>
@@ -299,12 +299,12 @@
                         <div class="card">
                             <h3>Conhecer proteção e direitos</h3>
                             <p>Veja informações sobre medidas protetivas e rede de atendimento.</p>
-                            <button class="btn outline" onclick="go('direitos')">Meus direitos</button>
+                            <button class="btn outline" data-action="go" data-action-arg="direitos">Meus direitos</button>
                         </div>
                     </div>
                     <div class="actions">
-                        <button class="btn outline" onclick="denStep(2)">Voltar</button>
-                        <button class="btn primary" onclick="go('home')">Voltar ao início</button>
+                        <button class="btn outline" data-action="denStep" data-action-arg="2">Voltar</button>
+                        <button class="btn primary" data-action="go" data-action-arg="home">Voltar ao início</button>
                     </div>
                 </div>
             </section>
@@ -316,13 +316,13 @@
                         <h1 id="delegacias-title">Delegacias próximas</h1>
                         <p>Autorize a localização e use o Google Maps para encontrar e traçar a rota.</p>
                     </div>
-                    <button class="btn primary" onclick="locate()">⌖ Usar minha localização</button>
+                    <button class="btn primary" data-action="locate">⌖ Usar minha localização</button>
                 </div>
                 <div class="mapgrid">
                     <div class="mapbox">
                         <div class="maptools">
                             <input id="search" placeholder="Endereço, bairro ou CEP" aria-label="Buscar endereço">
-                            <button class="btn outline" onclick="mapSearch()">Buscar</button>
+                            <button class="btn outline" data-action="mapSearch">Buscar</button>
                         </div>
                         <div class="map">
                             <iframe id="map" loading="lazy" title="Mapa de delegacias" src="https://www.google.com/maps?q=Delegacia%20da%20Mulher%20S%C3%A3o%20Paulo%20SP&output=embed"></iframe>
@@ -349,7 +349,7 @@
                         <h3>Sua história também pode ter um novo capítulo.</h3>
                         <p>Se você ou alguém que você conhece precisa de apoio, existe uma rede pronta para ouvir, orientar e acolher.</p>
                     </div>
-                    <button class="btn outline" onclick="go('ajuda')">Preciso de ajuda</button>
+                    <button class="btn outline" data-action="go" data-action-arg="ajuda">Preciso de ajuda</button>
                 </div>
             </section>
 
@@ -394,7 +394,7 @@
                         <p>Guarde prints, links e mensagens quando for seguro. A violência digital também pode ser denunciada.</p>
                     </div>
                 </div>
-                <div class="card" style="margin-top:16px">
+                <div class="card" class="notice-spaced">
                     <h3>Importante lembrar</h3>
                     <p>Você não é culpada pela violência. Não se coloque em risco para conseguir provas. Se puder, procure uma pessoa de confiança e um serviço especializado.</p>
                 </div>
@@ -415,33 +415,33 @@
                                 <b>Assistente Mulher Segura</b>
                                 <div class="online">● online · orientação virtual</div>
                             </div>
-                            <button class="chat-clear" onclick="clearChat()">Limpar</button>
+                            <button class="chat-clear" data-action="clearChat">Limpar</button>
                         </div>
                         <div class="msgs" id="msgs" aria-live="polite" aria-atomic="false">
                             <div class="msg bot">Oi. 💜 Eu sou o assistente virtual do Mulher Segura. Posso orientar sobre 181, Ligue 180, delegacias, direitos e medidas protetivas. Não sou uma atendente do governo e não consigo registrar uma denúncia por aqui.</div>
                             <div class="msg bot">Se você me contar o que precisa, sem colocar senhas ou dados muito pessoais, eu tento indicar o próximo caminho.</div>
                         </div>
                         <div class="chips">
-                            <button class="chip" onclick="quick('Quero denunciar')">Quero denunciar</button>
-                            <button class="chip" onclick="quick('Quero uma delegacia')">Quero uma delegacia</button>
-                            <button class="chip" onclick="quick('Quero saber meus direitos')">Meus direitos</button>
-                            <button class="chip" onclick="quick('Não sei por onde começar')">Não sei por onde começar</button>
+                            <button class="chip" data-action="quick" data-action-arg="Quero denunciar">Quero denunciar</button>
+                            <button class="chip" data-action="quick" data-action-arg="Quero uma delegacia">Quero uma delegacia</button>
+                            <button class="chip" data-action="quick" data-action-arg="Quero saber meus direitos">Meus direitos</button>
+                            <button class="chip" data-action="quick" data-action-arg="Não sei por onde começar">Não sei por onde começar</button>
                         </div>
                         <div class="chatinput">
-                            <input id="chatin" placeholder="Digite sua mensagem..." aria-label="Mensagem" onkeydown="if(event.key==='Enter')send()">
-                            <button class="btn primary" onclick="send()">Enviar</button>
+                            <input id="chatin" placeholder="Digite sua mensagem..." aria-label="Mensagem">
+                            <button class="btn primary" data-action="send">Enviar</button>
                         </div>
                     </div>
                     <div class="help">
                         <div class="card">
                             <h3>Denúncia anônima · 181</h3>
                             <p>Disque Denúncia de São Paulo e Web Denúncia.</p>
-                            <a class="btn primary" style="margin-top:9px" href="tel:181">Ligar 181</a>
+                            <a class="btn primary" class="spaced-top" href="tel:181">Ligar 181</a>
                         </div>
                         <div class="card">
                             <h3>Central da Mulher · 180</h3>
                             <p>Orientação, acolhimento e encaminhamento.</p>
-                            <a class="btn outline" style="margin-top:9px" href="tel:180">Ligar 180</a>
+                            <a class="btn outline" class="spaced-top" href="tel:180">Ligar 180</a>
                         </div>
                         <div class="card">
                             <h3>Privacidade</h3>
@@ -462,7 +462,7 @@
         </main>
     </div>
 
-    <button class="to-top" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo">↑</button>
+    <button class="to-top" id="toTop" data-action="scroll-top" aria-label="Voltar ao topo">↑</button>
 
         <script src="js/app.js" defer></script>
 </body>
