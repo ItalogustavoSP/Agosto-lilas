@@ -340,3 +340,36 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mobile-open { display:grid !important; position:absolute; z-index:50; right:10px; top:58px; width:min(280px,calc(100vw - 20px)); background:#351357; padding:9px; border-radius:13px; box-shadow:0 12px 30px rgba(0,0,0,.2); }
 .mobile-open button { justify-content:flex-start !important; }
 @media(max-width:760px) { .nav.mobile-open { display:grid; } }
+
+/* Ajustes pontuais de contraste e acessibilidade — sem redesign */
+.intro p,
+.intro .welcome,
+.stories-head p,
+.how-help > div > p,
+.head p {
+    color: #44394f;
+}
+.carousel {
+    background: linear-gradient(135deg, #351357, #54228c);
+    color: #fff;
+}
+.carousel .slide blockquote {
+    color: #fff;
+}
+.carousel .slide cite {
+    color: #f5edff;
+    opacity: 1;
+}
+.brand small {
+    color: #f5edff;
+    opacity: 1;
+}
+.side {
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+}
+.side-alert {
+    flex-shrink: 0;
+    margin-bottom: 2px;
+}
+
