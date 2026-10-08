@@ -56,13 +56,13 @@ const names = {
         ];
 
         function renderStories() {
-            document.getElementById('slides').innerHTML = stories.slice(0, 6).map((s, k) => `
-                <div class="slide${k === 0 ? ' on' : ''}" role="group" aria-roledescription="slide" aria-label="Relato ${k + 1} de ${Math.min(6, stories.length)}">
+            document.getElementById('slides').innerHTML = stories.map((s, k) => `
+                <div class="slide${k === 0 ? ' on' : ''}" role="group" aria-roledescription="slide" aria-label="Relato ${k + 1} de ${stories.length}">
                     <blockquote>${s.t}</blockquote>
                     <cite>— ${s.n}, ${s.ctx}</cite>
                 </div>`).join('');
-            document.getElementById('dots').innerHTML = stories.slice(0, 6).map((s, k) =>
-                `<button class="dot${k === 0 ? ' on' : ''}" data-action="showSlide" data-action-arg="${k}" aria-label="Ir para o relato ${k + 1}"></button>`).join('');
+            document.getElementById('dots').innerHTML = stories.map((s, k) =>
+                `<button class="dot${k === 0 ? ' on' : ''}" data-action="showSlide" data-action-arg="${k}" aria-label="Ir para o relato ${k + 1}" aria-current="${k === 0 ? 'true' : 'false'}"></button>`).join('');
             document.getElementById('storygrid').innerHTML = stories.map(s => `
                 <div class="story">
                     <div class="avatar" aria-hidden="true">${s.i}</div>
@@ -89,7 +89,10 @@ const names = {
                     quote.classList.remove('quote-enter-now');
                 }
             });
-            document.querySelectorAll('.dot').forEach((el, k) => el.classList.toggle('on', k === cur));
+            document.querySelectorAll('.dot').forEach((el, k) => {
+                el.classList.toggle('on', k === cur);
+                el.setAttribute('aria-current', k === cur ? 'true' : 'false');
+            });
             restartTimer();
         }
 
@@ -99,13 +102,22 @@ const names = {
             clearInterval(timer);
             // A preferência por movimento reduzido remove transições, mas não impede
             // que os relatos avancem automaticamente.
+            const progress = document.getElementById('carousel-progress-bar');
+            if (progress) {
+                progress.classList.remove('running');
+                void progress.offsetWidth;
+                progress.classList.add('running');
+            }
             timer = setInterval(() => showSlide(cur + 1), 5000);
         }
 
         const car = document.getElementById('carousel');
         // Não pausar apenas porque o ponteiro está sobre o carrossel: isso fazia
         // parecer que a troca automática não funcionava.
-        car?.addEventListener('focusin', () => clearInterval(timer));
+        car?.addEventListener('focusin', () => {
+            clearInterval(timer);
+            document.getElementById('carousel-progress-bar')?.classList.remove('running');
+        });
         car?.addEventListener('focusout', restartTimer);
 
         renderStories();
