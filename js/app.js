@@ -21,29 +21,17 @@ const names = {
 
         function menu() {
             const n = document.getElementById('nav');
-            const open = n.style.display === 'grid';
-            n.style.display = open ? 'none' : 'grid';
-            n.style.position = 'absolute';
-            n.style.right = '10px';
-            n.style.top = '58px';
-            n.style.width = '230px';
-            n.style.background = '#351357';
-            n.style.padding = '9px';
-            n.style.borderRadius = '13px';
+            const button = document.querySelector('.mobile-menu');
+            const open = n.classList.toggle('mobile-open');
+            button?.setAttribute('aria-expanded', String(open));
+            button?.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
         }
 
-        function exitNow() {
-            const neutral = window.open('https://www.google.com', '_blank');
-            if (neutral) {
-                window.location.replace('https://www.google.com');
-            } else {
-                window.location.replace('https://www.google.com');
-            }
-        }
+        function exitNow() { window.location.replace('https://www.google.com'); }
 
         function denStep(n) {
             [1, 2, 3].forEach(i => {
-                document.getElementById('d' + i).style.display = i === n ? 'block' : 'none';
+                document.getElementById('d' + i).hidden = i !== n;
                 document.getElementById('s' + i).classList.toggle('on', i <= n);
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -69,7 +57,7 @@ const names = {
                     <cite>— ${s.n}, ${s.ctx}</cite>
                 </div>`).join('');
             document.getElementById('dots').innerHTML = stories.slice(0, 6).map((s, k) =>
-                `<button class="dot${k === 0 ? ' on' : ''}" onclick="showSlide(${k})" aria-label="Ir para o relato ${k + 1}"></button>`).join('');
+                `<button class="dot${k === 0 ? ' on' : ''}" data-action="showSlide" data-action-arg="${k}" aria-label="Ir para o relato ${k + 1}"></button>`).join('');
             document.getElementById('storygrid').innerHTML = stories.map(s => `
                 <div class="story">
                     <div class="avatar" aria-hidden="true">${s.i}</div>
@@ -82,6 +70,7 @@ const names = {
         const total = () => document.querySelectorAll('.slide').length;
 
         function showSlide(n) {
+            if (!total()) return;
             cur = (n + total()) % total();
             document.querySelectorAll('.slide').forEach((el, k) => el.classList.toggle('on', k === cur));
             document.querySelectorAll('.dot').forEach((el, k) => el.classList.toggle('on', k === cur));
@@ -97,10 +86,10 @@ const names = {
         }
 
         const car = document.getElementById('carousel');
-        car.addEventListener('mouseenter', () => clearInterval(timer));
-        car.addEventListener('mouseleave', restartTimer);
-        car.addEventListener('focusin', () => clearInterval(timer));
-        car.addEventListener('focusout', restartTimer);
+        car?.addEventListener('mouseenter', () => clearInterval(timer));
+        car?.addEventListener('mouseleave', restartTimer);
+        car?.addEventListener('focusin', () => clearInterval(timer));
+        car?.addEventListener('focusout', restartTimer);
 
         renderStories();
         restartTimer();
@@ -217,3 +206,20 @@ const names = {
         window.addEventListener('scroll', () => {
             toTop.classList.toggle('show', window.scrollY > 400);
         }, { passive: true });
+
+
+/* Interações delegadas e acessibilidade do menu/chat. */
+document.addEventListener('click', event => {
+ const control = event.target.closest('[data-action]'); if (!control) return;
+ const action = control.dataset.action, raw = control.dataset.actionArg;
+ const arg = raw !== undefined && String(Number(raw)) === raw ? Number(raw) : raw;
+ if (control.getAttribute('href') === '#') event.preventDefault();
+ if (action === 'scroll-top') { window.scrollTo({top:0,behavior:'smooth'}); return; }
+ const fn = window[action]; if (typeof fn === 'function') raw === undefined ? fn() : fn(arg);
+});
+document.getElementById('chatin')?.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); send(); } });
+document.querySelectorAll('.nav [data-action]').forEach(control => control.addEventListener('click', () => {
+ document.querySelector('.mobile-menu')?.setAttribute('aria-expanded','false');
+ document.querySelector('.mobile-menu')?.setAttribute('aria-label','Abrir menu');
+ document.getElementById('nav')?.classList.remove('mobile-open');
+}));
