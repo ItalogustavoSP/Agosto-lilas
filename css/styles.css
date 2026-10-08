@@ -329,3 +329,14 @@
             .emergency a { margin-left: 0; width: 100%; text-align: center }
             .to-top { bottom: 16px; right: 16px; width: 42px; height: 42px }
         }
+
+
+/* Acessibilidade e componentes sem estilos inline */
+.card-spaced { margin-top:20px; }
+.notice-spaced { margin-top:16px; }
+.spaced-top { margin-top:9px; }
+[hidden] { display:none !important; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline:3px solid #d8b8ff; outline-offset:3px; }
+.mobile-open { display:grid !important; position:absolute; z-index:50; right:10px; top:58px; width:min(280px,calc(100vw - 20px)); background:#351357; padding:9px; border-radius:13px; box-shadow:0 12px 30px rgba(0,0,0,.2); }
+.mobile-open button { justify-content:flex-start !important; }
+@media(max-width:760px) { .nav.mobile-open { display:grid; } }
