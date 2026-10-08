@@ -1328,9 +1328,45 @@ button, .btn, .q { position: relative; overflow: hidden; }
     0% { box-shadow: 0 0 0 0 rgba(213,255,223,.8); }
     80%, 100% { box-shadow: 0 0 0 10px rgba(213,255,223,0); }
 }
-@media (prefers-reduced-motion: reduce) {
-    #home > .intro, #home > .intro::before, #home > .intro::after,
-    #home > .intro .hero-primary, #home > .intro .hero-note-dot {
-        animation: none !important;
-    }
+
+
+/* Movimento claramente visivel na pagina inicial */
+#home .intro {
+  animation: hero-color-sweep 4s ease-in-out infinite !important;
+  background-size: 300% 300% !important;
+}
+#home .intro::before {
+  animation: hero-ring-spin 5s linear infinite !important;
+  border-width: 3px !important;
+  opacity: 1 !important;
+}
+#home .intro::after {
+  animation: hero-orb-float 2.4s ease-in-out infinite !important;
+}
+#home .intro h1 {
+  animation: hero-title-float 3.6s ease-in-out infinite !important;
+}
+#home .intro .hero-primary {
+  animation: hero-button-pop 1.8s ease-in-out infinite !important;
+}
+#home .intro .hero-note-dot {
+  animation: hero-dot-beat 1s ease-out infinite !important;
+}
+#home .carousel {
+  animation: carousel-glow 3s ease-in-out infinite !important;
+}
+#home .stories-head h2 {
+  animation: story-title-in 1s ease-out both;
+}
+@keyframes hero-title-float {
+  0%, 100% { transform: translateY(0); text-shadow: 0 0 0 rgba(255,255,255,0); }
+  50% { transform: translateY(-5px); text-shadow: 0 8px 28px rgba(226,190,255,.28); }
+}
+@keyframes carousel-glow {
+  0%, 100% { box-shadow: 0 18px 38px rgba(55,24,81,.17); }
+  50% { box-shadow: 0 20px 54px rgba(123,62,180,.42), 0 0 0 3px rgba(190,142,242,.16); }
+}
+@keyframes story-title-in {
+  from { opacity: .25; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
 }
