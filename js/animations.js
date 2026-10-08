@@ -25,7 +25,7 @@
     function updateScroll() {
       var scrollable = document.documentElement.scrollHeight - window.innerHeight;
       var amount = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-      progressBar.style.transform = 'scaleX(' + Math.min(100, Math.max(0, amount)) / 100 + ')';
+      progressBar.style.transform = 'scaleX(' + (Math.min(100, Math.max(0, amount)) / 100) + ')';
       var header = document.querySelector('.top');
       if (header) header.classList.toggle('top-scrolled', window.scrollY > 18);
       ticking = false;
