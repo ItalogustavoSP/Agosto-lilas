@@ -1218,3 +1218,54 @@ button, .btn, .q { position: relative; overflow: hidden; }
     .motion-enabled .motion-reveal { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
     .interaction-ripple { display: none !important; }
 }
+
+/* Movimento mais perceptível: fundo vivo, elementos flutuantes e chamada de ação */
+#home > .intro {
+    background: linear-gradient(125deg, #2d123f 0%, #54228c 35%, #7843b4 68%, #321448 100%);
+    background-size: 260% 260%;
+    animation: hero-gradient-flow 9s ease-in-out infinite;
+}
+#home > .intro::before {
+    opacity: .9;
+    animation: hero-orbit-visible 16s linear infinite;
+}
+#home > .intro::after {
+    animation: hero-glow-visible 4.8s ease-in-out infinite;
+}
+#home > .intro .hero-primary {
+    animation: cta-attention 3.2s ease-in-out infinite;
+}
+#home > .intro .hero-primary:hover {
+    animation-play-state: paused;
+    transform: translateY(-3px) scale(1.025);
+}
+#home > .intro .hero-secondary:hover {
+    transform: translateY(-2px);
+}
+#home > .intro .hero-note-dot {
+    animation-duration: 1.6s;
+}
+@keyframes hero-gradient-flow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+@keyframes hero-orbit-visible {
+    from { rotate: 0deg; transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(1); }
+    50% { transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(1.06); }
+    to { rotate: 360deg; transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(1); }
+}
+@keyframes hero-glow-visible {
+    0%, 100% { transform: scale(.82); opacity: .42; }
+    50% { transform: scale(1.18); opacity: .95; }
+}
+@keyframes cta-attention {
+    0%, 72%, 100% { box-shadow: 0 12px 28px #160a2d38; }
+    82% { box-shadow: 0 0 0 7px #ffffff20, 0 14px 32px #160a2d55; }
+    90% { box-shadow: 0 0 0 3px #ffffff12, 0 12px 28px #160a2d38; }
+}
+@media (prefers-reduced-motion: reduce) {
+    #home > .intro,
+    #home > .intro::before,
+    #home > .intro::after,
+    #home > .intro .hero-primary { animation: none !important; }
+}
