@@ -89,11 +89,71 @@
         .eyebrow { font-size: 12px; font-weight: 900; color: var(--p2); letter-spacing: .5px }
 
         /* ===== Introdução da home (curta) ===== */
-        .intro { max-width: 780px; margin-bottom: 18px }
+        .intro {
+            max-width: 780px;
+            margin-bottom: 18px;
+            position: relative;
+            isolation: isolate;
+            animation: hero-cinematic-in 1.35s cubic-bezier(.22,.61,.36,1) both;
+        }
+        /* Brilho difuso e discreto, combinando com a transição suave dos relatos. */
+        .intro::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: min(70%, 440px);
+            height: 230px;
+            left: -34px;
+            top: -34px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(149,101,212,.14), rgba(149,101,212,0) 72%);
+            filter: blur(18px);
+            pointer-events: none;
+            animation: hero-glow-in 1.8s ease-out both;
+        }
+        .intro .eyebrow,
+        .intro h1,
+        .intro > p,
+        .intro .hero-actions,
+        .intro .hero-note {
+            animation: hero-content-in 1.15s cubic-bezier(.22,.61,.36,1) both;
+        }
+        .intro .eyebrow { animation-delay: .08s; }
+        .intro h1 { animation-delay: .2s; }
+        .intro > p { animation-delay: .34s; }
+        .intro .hero-actions { animation-delay: .48s; }
+        .intro .hero-note { animation-delay: .62s; }
         .intro h1 { font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -1.5px; margin: 10px 0 14px; color: var(--tx) }
-        .intro h1 span { color: var(--p2) }
+        .intro h1 span { color: var(--p2); text-shadow: 0 0 28px rgba(113,56,184,.12) }
         .intro p { color: var(--mut); font-size: 16px; max-width: 640px }
         .intro .welcome { color: var(--mut); font-size: 15px; margin-bottom: 24px; max-width: 640px; font-style: italic }
+        .hero-actions .btn { transition: transform .65s cubic-bezier(.22,.61,.36,1), box-shadow .65s ease, background-color .35s ease; }
+        .hero-actions .hero-primary { box-shadow: 0 10px 28px rgba(84,34,140,.22); }
+        .hero-actions .hero-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(84,34,140,.3); }
+        .hero-actions .hero-secondary:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(84,34,140,.10); }
+        .hero-note { display: flex; align-items: center; gap: 9px; margin-top: 18px; color: var(--mut); font-size: 13px; }
+        .hero-note-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--p2); box-shadow: 0 0 0 5px rgba(113,56,184,.10); flex: none; }
+        @keyframes hero-cinematic-in {
+            from { opacity: 0; filter: blur(9px); transform: translate3d(0, 20px, 0) scale(.99); }
+            to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) scale(1); }
+        }
+        @keyframes hero-content-in {
+            from { opacity: 0; filter: blur(6px); transform: translate3d(0, 16px, 0); }
+            to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0); }
+        }
+        @keyframes hero-glow-in {
+            from { opacity: 0; transform: scale(.82); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .intro, .intro::before, .intro .eyebrow, .intro h1, .intro > p,
+            .intro .hero-actions, .intro .hero-note {
+                animation: none !important;
+                filter: none !important;
+                transform: none !important;
+            }
+            .hero-actions .btn { transition: none !important; }
+        }
 
         /* ===== Relatos (protagonistas da home) ===== */
         .stories { margin-top: 12px }
