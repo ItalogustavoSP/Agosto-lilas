@@ -75,9 +75,27 @@ const names = {
         const total = () => document.querySelectorAll('.slide').length;
 
         function showSlide(n) {
-            const slides = document.querySelectorAll('.slide');
+            const slides = [...document.querySelectorAll('#carousel .slide')];
             if (!slides.length) return;
-            cur = (n + slides.length) % slides.length;
+            const previousIndex = cur;
+            const nextIndex = (n + slides.length) % slides.length;
+
+            // Mantém o relato anterior visível durante a saída, para que exista
+            // um crossfade real em vez de trocar o conteúdo de forma instantânea.
+            if (nextIndex !== previousIndex) {
+                const previous = slides[previousIndex];
+                if (previous) {
+                    previous.classList.remove('is-exiting', 'is-fading-out');
+                    previous.classList.add('is-exiting');
+                    void previous.offsetWidth;
+                    previous.classList.add('is-fading-out');
+                    window.setTimeout(() => {
+                        previous.classList.remove('is-exiting', 'is-fading-out');
+                    }, 1450);
+                }
+            }
+
+            cur = nextIndex;
             slides.forEach((el, k) => {
                 el.classList.toggle('on', k === cur);
                 const quote = el.querySelector('blockquote');
