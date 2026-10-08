@@ -75,9 +75,20 @@ const names = {
         const total = () => document.querySelectorAll('.slide').length;
 
         function showSlide(n) {
-            if (!total()) return;
-            cur = (n + total()) % total();
-            document.querySelectorAll('.slide').forEach((el, k) => el.classList.toggle('on', k === cur));
+            const slides = document.querySelectorAll('.slide');
+            if (!slides.length) return;
+            cur = (n + slides.length) % slides.length;
+            slides.forEach((el, k) => {
+                el.classList.toggle('on', k === cur);
+                const quote = el.querySelector('blockquote');
+                if (k === cur && quote) {
+                    quote.classList.remove('quote-enter-now');
+                    void quote.offsetWidth;
+                    quote.classList.add('quote-enter-now');
+                } else if (quote) {
+                    quote.classList.remove('quote-enter-now');
+                }
+            });
             document.querySelectorAll('.dot').forEach((el, k) => el.classList.toggle('on', k === cur));
             restartTimer();
         }
@@ -86,13 +97,14 @@ const names = {
 
         function restartTimer() {
             clearInterval(timer);
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            timer = setInterval(() => showSlide(cur + 1), 7000);
+            // A preferência por movimento reduzido remove transições, mas não impede
+            // que os relatos avancem automaticamente.
+            timer = setInterval(() => showSlide(cur + 1), 5000);
         }
 
         const car = document.getElementById('carousel');
-        car?.addEventListener('mouseenter', () => clearInterval(timer));
-        car?.addEventListener('mouseleave', restartTimer);
+        // Não pausar apenas porque o ponteiro está sobre o carrossel: isso fazia
+        // parecer que a troca automática não funcionava.
         car?.addEventListener('focusin', () => clearInterval(timer));
         car?.addEventListener('focusout', restartTimer);
 
