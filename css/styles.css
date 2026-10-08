@@ -1513,3 +1513,62 @@ button, .btn, .q { position: relative; overflow: hidden; }
 #carousel .carousel-progress span.running {
     animation: story-progress 3s linear forwards;
 }
+
+
+/* Transição cinematográfica dos relatos: lenta, suave e com profundidade. */
+#home .slide,
+#carousel .slide {
+    transition:
+        opacity 1.15s cubic-bezier(.22,.61,.36,1),
+        transform 1.35s cubic-bezier(.22,.61,.36,1),
+        filter 1.15s cubic-bezier(.22,.61,.36,1),
+        visibility 1.15s ease !important;
+    filter: blur(7px);
+    transform: translate3d(0, 22px, 0) scale(.985);
+    will-change: opacity, transform, filter;
+}
+#home .slide.on,
+#carousel .slide.on {
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1);
+}
+#home .slide blockquote.quote-enter-now,
+#carousel .slide blockquote.quote-enter-now {
+    animation: story-cinematic-entry 1.35s cubic-bezier(.16,1,.3,1) both !important;
+}
+#home .slide.on cite,
+#carousel .slide.on cite {
+    animation: story-signature-entry 1.05s cubic-bezier(.16,1,.3,1) .18s both;
+}
+@keyframes story-cinematic-entry {
+    0% { opacity: 0; transform: translate3d(0, 24px, 0); filter: blur(8px); letter-spacing: .3px; }
+    65% { opacity: 1; filter: blur(0); }
+    100% { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); letter-spacing: inherit; }
+}
+@keyframes story-signature-entry {
+    from { opacity: 0; transform: translate3d(0, 12px, 0); }
+    to { opacity: .85; transform: translate3d(0, 0, 0); }
+}
+#home .carousel::after,
+#carousel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.055), transparent 68%);
+}
+@media (prefers-reduced-motion: reduce) {
+    #home .slide,
+    #carousel .slide,
+    #home .slide blockquote.quote-enter-now,
+    #carousel .slide blockquote.quote-enter-now,
+    #home .slide.on cite,
+    #carousel .slide.on cite {
+        animation: none !important;
+        transition: none !important;
+        filter: none !important;
+        transform: none !important;
+        will-change: auto;
+    }
+}
