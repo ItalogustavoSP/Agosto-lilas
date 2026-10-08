@@ -15,7 +15,12 @@ const names = {
             document.querySelectorAll('.screen').forEach(x => x.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             document.getElementById('title').textContent = names[id];
-            document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('on', x.dataset.s === id));
+            document.querySelectorAll('.nav button').forEach(x => {
+                const current = x.dataset.s === id;
+                x.classList.toggle('on', current);
+                if (current) x.setAttribute('aria-current', 'page');
+                else x.removeAttribute('aria-current');
+            });
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
