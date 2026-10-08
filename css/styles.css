@@ -1372,3 +1372,122 @@ button, .btn, .q { position: relative; overflow: hidden; }
   from { opacity: .25; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* Carrossel de relatos: foco visual, progresso temporal e controles claros */
+#home .carousel {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.2);
+    background:
+      radial-gradient(ellipse at 12% 100%, rgba(198,148,255,.2), transparent 42%),
+      radial-gradient(circle at 100% 0%, rgba(255,255,255,.13), transparent 35%),
+      linear-gradient(125deg, #241033 0%, #4b1b70 48%, #7138a4 100%);
+    box-shadow: 0 22px 55px rgba(49,18,75,.2);
+}
+#home .carousel::before {
+    content: "“";
+    position: absolute;
+    z-index: 0;
+    left: clamp(18px,3vw,42px);
+    top: -28px;
+    color: rgba(255,255,255,.12);
+    font-family: Georgia, serif;
+    font-size: clamp(100px,13vw,170px);
+    line-height: 1;
+    pointer-events: none;
+}
+#home .slides { min-height: 285px; }
+#home .slide {
+    z-index: 1;
+    gap: 0;
+    padding-top: clamp(42px,5vw,64px);
+    padding-bottom: 88px;
+}
+#home .slide blockquote {
+    max-width: 850px;
+    position: relative;
+    font-size: clamp(18px,2.1vw,25px);
+    line-height: 1.7;
+    font-weight: 560;
+    letter-spacing: -.3px;
+}
+#home .slide cite {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    margin-top: 22px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,.22);
+    color: #eadcf8;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 650;
+}
+#home .carousel-progress {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: rgba(255,255,255,.12);
+}
+#home .carousel-progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: left center;
+    background: #e4c5ff;
+}
+#home .carousel-progress span.running {
+    animation: story-progress 5s linear forwards;
+}
+#home .car-ctrl {
+    z-index: 4;
+    bottom: 17px;
+    align-items: center;
+}
+#home .dots { max-width: calc(100% - 100px); flex-wrap: wrap; gap: 7px; }
+#home .dot {
+    flex: 0 0 7px;
+    width: 7px;
+    height: 7px;
+    margin: 0;
+    border: 0;
+    border-radius: 99px;
+    background: rgba(255,255,255,.4);
+    transition: width .28s ease, background .28s ease, transform .28s ease;
+}
+#home .dot.on {
+    flex-basis: 24px;
+    width: 24px;
+    background: #fff;
+    transform: none;
+}
+#home .arrow {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,.38);
+    background: rgba(255,255,255,.1);
+    backdrop-filter: blur(8px);
+    font-size: 25px;
+    line-height: 1;
+}
+#home .arrow:hover { background: rgba(255,255,255,.24); transform: translateY(-2px); }
+@keyframes story-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (max-width: 760px) {
+    #home .slides { min-height: 370px; }
+    #home .slide { padding: 43px 20px 91px; }
+    #home .slide blockquote { font-size: 17px; line-height: 1.72; }
+    #home .slide cite { font-size: 11px; margin-top: 18px; }
+    #home .car-ctrl { left: 20px; right: 14px; bottom: 17px; }
+    #home .dots { max-width: calc(100% - 92px); gap: 6px; }
+    #home .dot { flex-basis: 6px; width: 6px; height: 6px; }
+    #home .dot.on { flex-basis: 19px; width: 19px; }
+    #home .arrow { width: 36px; height: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    #home .carousel-progress span.running { animation: none !important; transform: scaleX(1); }
+}
