@@ -126,7 +126,7 @@ const names = {
                 void progress.offsetWidth;
                 progress.classList.add('running');
             }
-            timer = setInterval(() => showSlide(cur + 1), 3000);
+            timer = setInterval(() => showSlide(cur + 1), 6000);
         }
 
         const car = document.getElementById('carousel');
