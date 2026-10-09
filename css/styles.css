@@ -1669,3 +1669,18 @@ button, .btn, .q { position: relative; overflow: hidden; }
         transition: none !important;
     }
 }
+
+
+/* Ajuste final do fundo lilás: sobrescreve o tema antigo definido acima. */
+:root {
+    --bg: #EDE0F8;
+}
+body {
+    background:
+        radial-gradient(ellipse at 8% 5%, rgba(213, 185, 241, .58), transparent 42%),
+        linear-gradient(135deg, #EDE0F8 0%, #F3EAFB 48%, #E7D7F5 100%) !important;
+    background-attachment: fixed !important;
+}
+.top {
+    background: rgba(237, 224, 248, .93) !important;
+}
