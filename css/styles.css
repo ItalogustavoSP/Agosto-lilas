@@ -7,7 +7,7 @@
             --p2: #7138b8;
             --p3: #9565d4;
             --l: #f0e5fb;
-            --bg: #faf8fd;
+            --bg: #F3ECFA;
             --tx: #21172f;
             --mut: #5c5364;
             --bd: #e6dcef;
@@ -25,7 +25,8 @@
 
         body {
             font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-            background: linear-gradient(135deg, #fff, #f4ecfb);
+            background: radial-gradient(ellipse at top left, rgba(232, 217, 247, .62), transparent 56%), linear-gradient(135deg, #F3ECFA 0%, #F7F1FC 48%, #EEE4F8 100%);
+            background-attachment: fixed;
             color: var(--tx);
             line-height: 1.5
         }
@@ -77,7 +78,7 @@
 
         /* ===== Header ===== */
         .top {
-            height: 70px; position: sticky; top: 0; z-index: 10; background: #fffffff2; backdrop-filter: blur(12px);
+            height: 70px; position: sticky; top: 0; z-index: 10; background: rgba(243, 236, 250, .92); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--bd); display: flex; justify-content: space-between; align-items: center; padding: 0 32px
         }
         .top b { font-size: 14px }
